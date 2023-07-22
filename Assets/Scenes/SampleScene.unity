@@ -420,5 +420,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _body: {fileID: 1858922426}
   _moveForce: 50
-  _moveSpeed: 5
+  _moveSpeed: 7.5
   _minVelocity: 0.25
