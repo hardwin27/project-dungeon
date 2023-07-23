@@ -9,51 +9,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected float _actionCooldown;
     private float _cooldownTimer = -1f;
     protected IHitResponder _ownerHitResponder;
-
-    [SerializeField] protected Collider2D _pickUpTrigger;
-    protected string _weaponLayerName = "Weapon";
-    [SerializeField] private Vector3 _posOffsetWhenPicked;
-    public Vector3 PosOffsetWhenPicked { get => _posOffsetWhenPicked; }
-
-    protected virtual void Awake()
-    {
-        /*_pickUpTrigger = GetComponent<Collider2D>();*/
-        _pickUpTrigger.enabled = true;
-        gameObject.layer = LayerMask.NameToLayer(_weaponLayerName);
-
-
-    }
-
-    public virtual void WeaponPicked(int parentLayer)
-    {
-        _pickUpTrigger.enabled = false;
-        gameObject.layer = parentLayer;
-        _isOnAction = false;
-        _cooldownTimer = -1;
-        /*transform.position = pickerTransform.position + _posOffsetWhenPicked;
-        transform.rotation = pickerTransform.rotation;*/
-    }
-
-    public virtual void WeaponDropped()
-    {
-        _pickUpTrigger.enabled = true;
-        gameObject.layer = LayerMask.NameToLayer(_weaponLayerName);
-        _isOnAction = false;
-        _cooldownTimer = -1;
-        /*transform.position = dropPosition;
-        transform.rotation = Quaternion.AngleAxis(0f, Vector3.forward);*/
-    }
-
-    public virtual void WeaponEnabled()
-    {
-        gameObject.SetActive(true);
-
-    }
-
-    public virtual void WeaponDisabled()
-    {
-        gameObject.SetActive(false);
-    }
+    public IHitResponder OwnerHitResponder { set; get; }
 
     public bool IsOnAction
     {
@@ -67,8 +23,6 @@ public class Weapon : MonoBehaviour
             return (_cooldownTimer > 0f);
         }
     }
-
-    public IHitResponder OwnerHitResponder { set; get; }
 
     protected virtual void Update()
     {
