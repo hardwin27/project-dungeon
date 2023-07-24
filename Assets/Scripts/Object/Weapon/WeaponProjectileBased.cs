@@ -10,6 +10,8 @@ public class WeaponProjectileBased : Weapon
     protected override void Action()
     {
         base.Action();
+        Shoot();
+        StartCooldown();
     }
 
     protected virtual void Shoot()
