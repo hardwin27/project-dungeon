@@ -6,11 +6,20 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private CharacterMovement _characterMovement;
     [SerializeField] private CharacterCombat _characterCombat;
+    [SerializeField] private CharacterVisual _characterVisual;
+
+    private Camera _mainCamera;
+
+    private void Start()
+    {
+        _mainCamera = Camera.main;
+    }
 
     private void Update()
     {
         InputDirectionHandler();
         InputActionHandler();
+        MouseDirectionHandler();
     }
 
     private void InputDirectionHandler()
@@ -28,5 +37,10 @@ public class PlayerInput : MonoBehaviour
         {
             _characterCombat.EndInputAction();
         }
+    }
+
+    private void MouseDirectionHandler()
+    {
+        _characterVisual.LookTo(_mainCamera.ScreenToWorldPoint(Input.mousePosition));
     }
 }
