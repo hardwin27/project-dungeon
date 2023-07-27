@@ -18,13 +18,11 @@ public class CharacterCombat : MonoBehaviour, IHitResponder
 
     public void StartInputAction()
     {
-        Debug.Log("StartInputAction");
         _weapon.ActionInputStart();
     }
 
     public void EndInputAction()
     {
-        Debug.Log("EndInputAction");
         _weapon.ActionInputEnd();
     }
 
