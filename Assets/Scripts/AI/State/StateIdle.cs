@@ -12,6 +12,12 @@ public class StateIdle : IState
     private float _lookAroundInterval;
     private float _lookAroundTimer;
 
+    public StateIdle(CharacterMovement characterMovement, CharacterVisual characterVisual)
+    {
+        _characterMovement = characterMovement;
+        _characterVisual = characterVisual;
+    }
+
     public void OnEnter()
     {
         _characterMovement.MoveToDirection(Vector2.zero);

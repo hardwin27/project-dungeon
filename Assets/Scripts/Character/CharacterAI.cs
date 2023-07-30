@@ -7,6 +7,8 @@ public class CharacterAiData
 {
     [SerializeField] private GameObject _aiTarget = null;
 
+
+
     public GameObject AiTarget { set => _aiTarget = value; get => _aiTarget; }
 }
 
@@ -20,6 +22,8 @@ public class CharacterAi : MonoBehaviour
 
     [SerializeField] private LayerMask _targetLayerMask;
     [SerializeField] private float _targetDetectionRange;
+
+    [SerializeField] private float _combatDetectionRange;
     
     private StateMachine _stateMachine;
 
@@ -38,6 +42,12 @@ public class CharacterAi : MonoBehaviour
     private void InitiateStateMachine()
     {
         _stateMachine = new StateMachine();
+
+        StateIdle stateIdle = new StateIdle(_characterMovement, _characterVisual);
+        StateChase stateChase = new StateChase(_characterMovement, _characterVisual, _aiData);
+        StateCombat stateCombat = new StateCombat(_characterMovement, _characterVisual, _characterCombat, _aiData);
+
+        
     }
 
     private void DetectTarget()
@@ -51,5 +61,28 @@ public class CharacterAi : MonoBehaviour
         {
             _aiData.AiTarget = null;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (_characterVisual == null)
+        {
+            return;
+        }
+
+        AiTargetDetectionGizmos();
+        AiCombatRangeGizmos();
+    }
+
+    private void AiTargetDetectionGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(_characterVisual.transform.position, _targetDetectionRange);
+    }
+
+    private void AiCombatRangeGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(_characterVisual.transform.position, _combatDetectionRange);
     }
 }
