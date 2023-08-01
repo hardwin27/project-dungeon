@@ -24,6 +24,8 @@ public class StateMachine
     private List<Transition> _fromAnyTransitions = new List<Transition>();
     private static List<Transition> EmptyTransition = new List<Transition>(0);
 
+    public string CurrentStateName { get => (_currentState == null) ? "" : _currentState.GetType().ToString(); }
+
     public void Tick()
     {
         Transition executedTransition = GetExecutedTransition();

@@ -24,6 +24,8 @@ public class CharacterAi : MonoBehaviour
     [SerializeField] private float _targetDetectionRange;
 
     [SerializeField] private float _combatDetectionRange;
+
+    [SerializeField] private string _currentState;
     
     private StateMachine _stateMachine;
 
@@ -37,6 +39,8 @@ public class CharacterAi : MonoBehaviour
         DetectorHandler();
 
         _stateMachine.Tick();
+
+        _currentState = _stateMachine.CurrentStateName;
     }
 
     private void InitiateStateMachine()

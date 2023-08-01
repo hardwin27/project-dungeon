@@ -29,7 +29,7 @@ public class PlayerInput : MonoBehaviour
 
     private void InputActionHandler()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if(Input.GetKey(KeyCode.Mouse0))
         {
             _characterCombat.StartInputAction();
         }
