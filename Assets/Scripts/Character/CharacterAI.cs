@@ -6,10 +6,10 @@ using UnityEngine;
 public class CharacterAiData
 {
     [SerializeField] private GameObject _aiTarget = null;
-
-
+    [SerializeField] private bool _canAttack = false;
 
     public GameObject AiTarget { set => _aiTarget = value; get => _aiTarget; }
+    public bool CanAttack { set => _canAttack = value; get => _canAttack; }
 }
 
 public class CharacterAi : MonoBehaviour
@@ -34,7 +34,7 @@ public class CharacterAi : MonoBehaviour
 
     private void Update()
     {
-        DetectTarget();
+        DetectorHandler();
 
         _stateMachine.Tick();
     }
@@ -47,7 +47,22 @@ public class CharacterAi : MonoBehaviour
         StateChase stateChase = new StateChase(_characterMovement, _characterVisual, _aiData);
         StateCombat stateCombat = new StateCombat(_characterMovement, _characterVisual, _characterCombat, _aiData);
 
-        
+        _stateMachine.SetState(stateIdle);
+
+        _stateMachine.AddTransition(stateIdle, stateChase, () => _aiData.AiTarget != null);
+        _stateMachine.AddTransition(stateChase, stateIdle, () => _aiData.AiTarget == null);
+
+        _stateMachine.AddTransition(stateIdle, stateCombat, () => _aiData.CanAttack);
+        _stateMachine.AddTransition(stateChase, stateCombat, () => _aiData.CanAttack);
+
+        _stateMachine.AddTransition(stateCombat, stateIdle, () => !_aiData.CanAttack && _aiData.AiTarget == null);
+        _stateMachine.AddTransition(stateCombat, stateChase, () => !_aiData.CanAttack && _aiData.AiTarget != null);
+    }
+
+    private void DetectorHandler()
+    {
+        DetectTarget();
+        CanAttackHandler();
     }
 
     private void DetectTarget()
@@ -55,12 +70,45 @@ public class CharacterAi : MonoBehaviour
         Collider2D targetCollider = Physics2D.OverlapCircle(_characterVisual.transform.position, _targetDetectionRange, _targetLayerMask);
         if (targetCollider != null)
         {
-            _aiData.AiTarget = (targetCollider.attachedRigidbody == null) ? targetCollider.gameObject : targetCollider.attachedRigidbody.gameObject;
+            _aiData.AiTarget = targetCollider.gameObject;
         }
         else
         {
             _aiData.AiTarget = null;
         }
+    }
+
+    private void CanAttackHandler()
+    {
+        if (_aiData.AiTarget == null)
+        {
+            _aiData.CanAttack = false;
+        }
+        else
+        {
+            Collider2D[] overlapColliders = Physics2D.OverlapCircleAll(_characterVisual.transform.position, _combatDetectionRange, _targetLayerMask);
+            foreach(Collider2D overlapCollider in overlapColliders)
+            {
+                if (overlapCollider.gameObject == _aiData.AiTarget)
+                {
+                    _aiData.CanAttack = true;
+                    return;
+                }
+            }
+
+            _aiData.CanAttack = false;
+        }
+
+        /*Collider2D targetCollider = Physics2D.OverlapCircle(_characterVisual.transform.position, _combatDetectionRange, _targetLayerMask);
+        
+        if (targetCollider != null)
+        {
+            _aiData.AiTarget = targetCollider.gameObject;
+        }
+        else
+        {
+            _aiData.AiTarget = null;
+        }*/
     }
 
     private void OnDrawGizmos()
