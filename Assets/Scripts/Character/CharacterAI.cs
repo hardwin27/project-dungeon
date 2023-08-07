@@ -8,6 +8,12 @@ public class CharacterAiData
     [SerializeField] private GameObject _aiTarget = null;
     [SerializeField] private bool _canAttack = false;
 
+    /*public GameObject AiTarget 
+    { 
+        set { _aiTarget = value; }
+        get { return _aiTarget; }
+    }*/
+
     public GameObject AiTarget { set => _aiTarget = value; get => _aiTarget; }
     public bool CanAttack { set => _canAttack = value; get => _canAttack; }
 }
@@ -27,7 +33,7 @@ public class CharacterAi : MonoBehaviour
 
     [SerializeField] private string _currentState;
     
-    private StateMachine _stateMachine;
+    [SerializeField] private StateMachine _stateMachine;
 
     private void Awake()
     {
@@ -51,8 +57,6 @@ public class CharacterAi : MonoBehaviour
         StateChase stateChase = new StateChase(_characterMovement, _characterVisual, _aiData);
         StateCombat stateCombat = new StateCombat(_characterMovement, _characterVisual, _characterCombat, _aiData);
 
-        _stateMachine.SetState(stateIdle);
-
         _stateMachine.AddTransition(stateIdle, stateChase, () => _aiData.AiTarget != null);
         _stateMachine.AddTransition(stateChase, stateIdle, () => _aiData.AiTarget == null);
 
@@ -61,6 +65,10 @@ public class CharacterAi : MonoBehaviour
 
         _stateMachine.AddTransition(stateCombat, stateIdle, () => !_aiData.CanAttack && _aiData.AiTarget == null);
         _stateMachine.AddTransition(stateCombat, stateChase, () => !_aiData.CanAttack && _aiData.AiTarget != null);
+
+
+
+        _stateMachine.SetState(stateIdle);
     }
 
     private void DetectorHandler()
@@ -74,7 +82,9 @@ public class CharacterAi : MonoBehaviour
         Collider2D targetCollider = Physics2D.OverlapCircle(_characterVisual.transform.position, _targetDetectionRange, _targetLayerMask);
         if (targetCollider != null)
         {
-            _aiData.AiTarget = targetCollider.gameObject;
+            
+            GameObject targetObject = targetCollider.gameObject;
+            _aiData.AiTarget = targetObject;
         }
         else
         {

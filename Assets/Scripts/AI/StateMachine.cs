@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class StateMachine
 {
+    [System.Serializable]
     private class Transition
     {
         public Func<bool> CanTransition { get; }
@@ -19,10 +21,10 @@ public class StateMachine
 
     private IState _currentState = null;
 
-    private Dictionary<Type, List<Transition>> _allTransitions = new Dictionary<Type, List<Transition>>();
-    private List<Transition> _currentTransitions = new List<Transition>();
-    private List<Transition> _fromAnyTransitions = new List<Transition>();
-    private static List<Transition> EmptyTransition = new List<Transition>(0);
+    [SerializeField] private Dictionary<Type, List<Transition>> _allTransitions = new Dictionary<Type, List<Transition>>();
+    [SerializeField] private List<Transition> _currentTransitions = new List<Transition>();
+    [SerializeField] private List<Transition> _fromAnyTransitions = new List<Transition>();
+    [SerializeField] private static List<Transition> EmptyTransition = new List<Transition>(0);
 
     public string CurrentStateName { get => (_currentState == null) ? "" : _currentState.GetType().ToString(); }
 
@@ -46,13 +48,15 @@ public class StateMachine
 
         _currentState?.OnExit();
         _currentState = state;
+
+        _allTransitions.TryGetValue(_currentState.GetType(), out _currentTransitions);
         
-        if (!_allTransitions.TryGetValue(_currentState.GetType(), out _currentTransitions))
+        if (_currentTransitions == null)
         {
             _currentTransitions = EmptyTransition;
         }
 
-        _currentState?.OnEnter();
+        _currentState.OnEnter();
     }
 
     private Transition GetExecutedTransition()
