@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class CharacterEntity : MonoBehaviour, IHurtResponder, IHaveHealth, IHaveTeam
 {
-    [SerializeField] private float _currentHealth;
+
     [SerializeField] private float _maxHealth;
+    [SerializeField] private float _currentHealth;
     [SerializeField] private Team _myTeam;
 
 
     public GameObject Owner => gameObject;
 
-    public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
+
     public float CurrentHealth { get => _currentHealth; set => _currentHealth = value; }
+    public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
     public Team MyTeam { get => _myTeam; set => _myTeam = value; }
 
     [SerializeField] private IHurtArea[] _hurtAreas;
@@ -20,6 +22,11 @@ public class CharacterEntity : MonoBehaviour, IHurtResponder, IHaveHealth, IHave
     private void Awake()
     {
         InitiateHurtBoxes();
+    }
+
+    private void Start()
+    {
+        CurrentHealth = MaxHealth;
     }
 
     private void InitiateHurtBoxes()
@@ -34,11 +41,22 @@ public class CharacterEntity : MonoBehaviour, IHurtResponder, IHaveHealth, IHave
 
     public bool CheckHit(HitData hitData)
     {
-        throw new System.NotImplementedException();
+        Debug.Log($"{gameObject.name} HURT CHECKHIT");
+        return true;
     }
 
     public void Response(HitData hitData)
     {
-        throw new System.NotImplementedException();
+        AddHealth(-hitData.Damage);
+    }
+
+    private void AddHealth(float healthValue)
+    {
+        CurrentHealth += healthValue;
+
+        if (CurrentHealth <= 0f)
+        {
+            Destroy(gameObject);
+        }
     }
 }

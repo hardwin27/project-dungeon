@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6445338005895709534, guid: 425108eb974e3c24ca95658fe5aac8fd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8412596142559229723, guid: 425108eb974e3c24ca95658fe5aac8fd, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -195,6 +199,10 @@ PrefabInstance:
     - target: {fileID: 5289828733177936300, guid: 425108eb974e3c24ca95658fe5aac8fd, type: 3}
       propertyPath: m_Name
       value: Enemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289828733177936300, guid: 425108eb974e3c24ca95658fe5aac8fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8412596142559229723, guid: 425108eb974e3c24ca95658fe5aac8fd, type: 3}
       propertyPath: m_RootOrder
@@ -364,6 +372,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5289828733177936300, guid: 425108eb974e3c24ca95658fe5aac8fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8412596142559229723, guid: 425108eb974e3c24ca95658fe5aac8fd, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -424,6 +436,10 @@ PrefabInstance:
     - target: {fileID: 5289828733177936300, guid: 425108eb974e3c24ca95658fe5aac8fd, type: 3}
       propertyPath: m_Name
       value: Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289828733177936300, guid: 425108eb974e3c24ca95658fe5aac8fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8412596142559229723, guid: 425108eb974e3c24ca95658fe5aac8fd, type: 3}
       propertyPath: m_RootOrder
@@ -546,6 +562,10 @@ PrefabInstance:
     - target: {fileID: 5289828733177936300, guid: 425108eb974e3c24ca95658fe5aac8fd, type: 3}
       propertyPath: m_Name
       value: Enemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289828733177936300, guid: 425108eb974e3c24ca95658fe5aac8fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8412596142559229723, guid: 425108eb974e3c24ca95658fe5aac8fd, type: 3}
       propertyPath: m_RootOrder

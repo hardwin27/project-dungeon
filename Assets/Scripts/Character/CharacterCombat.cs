@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterCombat : MonoBehaviour, IHitResponder
 {
+    [SerializeField] private CharacterEntity _characterEntity;
+
     [SerializeField] private Weapon _weapon;
     [SerializeField] private float _damage;
 
@@ -28,11 +30,25 @@ public class CharacterCombat : MonoBehaviour, IHitResponder
 
     public bool CheckHit(HitData hitData)
     {
-        throw new System.NotImplementedException();
+        Debug.Log($"{gameObject.name} HIT CHECKHIT");
+        if (hitData.HurtArea.HurtResponder.Owner == Owner)
+        {
+            return false;
+        }
+
+        if(hitData.HurtArea.HurtResponder.Owner.TryGetComponent(out IHaveTeam haveTeamCom))
+        {
+            if (haveTeamCom.MyTeam == _characterEntity.MyTeam)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public void Response(HitData hitData)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

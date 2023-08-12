@@ -173,6 +173,14 @@ PrefabInstance:
       propertyPath: _weapon
       value: 
       objectReference: {fileID: 322026394856229744}
+    - target: {fileID: 2428044460530535489, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
+      propertyPath: _maxHealth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428044460530535489, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
+      propertyPath: _currentHealth
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4757218066761853846, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -299,6 +307,10 @@ MonoBehaviour:
     m_Bits: 8
   _targetDetectionRange: 10
   _combatDetectionRange: 5
+  _currentState: 
+  _stateMachine:
+    _currentTransitions: []
+    _fromAnyTransitions: []
 --- !u!114 &5295594465309008563 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9207389695606914622, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
