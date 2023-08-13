@@ -9,6 +9,8 @@ public class HitBox : MonoBehaviour, IHitArea
 
     private IHitResponder _hitResponder;
 
+    public event IHitArea.HitAreaEvent OnHitted;
+
     public IHitResponder HitResponder { get { return _hitResponder; } set { _hitResponder = value; } }
 
     public Transform HitAreaTransform => transform;
@@ -39,6 +41,7 @@ public class HitBox : MonoBehaviour, IHitArea
             {
                 hitData.HitArea.HitResponder?.Response(hitData);
                 hitData.HurtArea.HurtResponder?.Response(hitData);
+                OnHitted?.Invoke();
             }
         }
     }

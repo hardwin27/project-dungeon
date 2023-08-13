@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectileDamage: 1
   _body: {fileID: 9134502899553848467}
+  _projectileDuration: 3
 --- !u!58 &4903847186081775722
 CircleCollider2D:
   m_ObjectHideFlags: 0
