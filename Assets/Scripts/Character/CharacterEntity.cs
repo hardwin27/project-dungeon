@@ -41,7 +41,6 @@ public class CharacterEntity : MonoBehaviour, IHurtResponder, IHaveHealth, IHave
 
     public bool CheckHit(HitData hitData)
     {
-        Debug.Log($"{gameObject.name} HURT CHECKHIT");
         return true;
     }
 

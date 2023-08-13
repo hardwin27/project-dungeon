@@ -18,7 +18,6 @@ public class HitBox : MonoBehaviour, IHitArea
         if (collision.gameObject.TryGetComponent(out IHurtArea hurtArea))
         {
             CheckHit(hurtArea);
-            Debug.Log($"{hurtArea.HurtResponder.Owner.name} DETECTED");
         }
     }
 
@@ -38,7 +37,6 @@ public class HitBox : MonoBehaviour, IHitArea
 
             if (hitData.Validate())
             {
-                Debug.Log($"HIT VALIDATED BETWEEN {hitData.HitArea.HitResponder} and {hitData.HurtArea.HurtResponder}");
                 hitData.HitArea.HitResponder?.Response(hitData);
                 hitData.HurtArea.HurtResponder?.Response(hitData);
             }

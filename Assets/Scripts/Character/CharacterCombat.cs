@@ -30,7 +30,11 @@ public class CharacterCombat : MonoBehaviour, IHitResponder
 
     public bool CheckHit(HitData hitData)
     {
-        Debug.Log($"{gameObject.name} HIT CHECKHIT");
+        if (hitData.HurtArea == null)
+        {
+            return false;
+        }
+
         if (hitData.HurtArea.HurtResponder.Owner == Owner)
         {
             return false;

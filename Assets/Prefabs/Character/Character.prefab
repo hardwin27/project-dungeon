@@ -209,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterEntity: {fileID: 2428044460530535489}
   _weapon: {fileID: 0}
-  _damage: 0
+  _damage: 1
 --- !u!114 &9207389695606914622
 MonoBehaviour:
   m_ObjectHideFlags: 0
