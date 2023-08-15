@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7158684899781675895}
   - component: {fileID: 2634332761024203358}
   m_Layer: 0
-  m_Name: WeaponGun
+  m_Name: Weapon Basic Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
