@@ -129,7 +129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69d4ce6084146a45acfedc59b884df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterEntity: {fileID: 0}
   _isOnAction: 0
-  _actionCooldown: 1
-  _projectilePrefab: {fileID: 7911565888522328405, guid: 8f5b16df89452ed44b18fd04486450d8, type: 3}
-  _projectileForce: 20
+  _actionCooldown: 2.5
+  _damage: 5
+  _projectilePrefab: {fileID: 7911565888522328405, guid: 86066d18573936646a39a5cb755ea462, type: 3}
+  _projectileForce: 5

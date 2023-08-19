@@ -19,9 +19,8 @@ public class WeaponProjectileBased : Weapon
         GameObject projectileObject = Instantiate(_projectilePrefab, transform.position, transform.rotation);
         if (projectileObject.TryGetComponent(out Projectile projectile))
         {
-            projectile.HitArea.HitResponder = OwnerHitResponder;
+            projectile.HitArea.HitResponder = this;
             projectile.Body.AddForce(_projectileForce * transform.right, ForceMode2D.Impulse);
-            projectile.ProjectileDamage = OwnerHitResponder.Damage;
         }
     }
 }

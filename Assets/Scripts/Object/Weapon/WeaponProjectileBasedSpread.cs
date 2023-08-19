@@ -13,9 +13,8 @@ public class WeaponProjectileBasedSpread : WeaponProjectileBased
             GameObject projectileObject = Instantiate(_projectilePrefab, transform.position, transform.rotation);
             if (projectileObject.TryGetComponent(out Projectile projectile))
             {
-                projectile.HitArea.HitResponder = OwnerHitResponder;
-                projectile.Body.AddForce(_projectileForce * (spreadPoint.position - transform.position).normalized, ForceMode2D.Impulse);
-                projectile.ProjectileDamage = OwnerHitResponder.Damage;
+                projectile.HitArea.HitResponder = this;
+                projectile.Body.AddForce(_projectileForce * (spreadPoint.position - transform.position).normalized, ForceMode2D.Impulse);    
             }
         }
     }

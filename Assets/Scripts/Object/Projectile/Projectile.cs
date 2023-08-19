@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float _projectileDamage;
-    [SerializeField] private Rigidbody2D _body;
+    [SerializeField] protected Rigidbody2D _body;
 
-    [SerializeField] private float _projectileDuration;
+    [SerializeField] protected float _projectileDuration;
 
-    private IHitArea _hitArea;
+    protected IHitArea _hitArea;
 
     public Rigidbody2D Body { get { return _body; } }
-    public IHitArea HitArea { get { return _hitArea; } }
-    /*public IHitResponder OwnerHitResponder { set; get; }*/
+    public IHitArea HitArea { get { return _hitArea; } }/*public IHitResponder OwnerHitResponder { set; get; }*/
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         _hitArea = GetComponent<IHitArea>();
         if (_hitArea !=null )
@@ -25,7 +23,7 @@ public class Projectile : MonoBehaviour
         StartCoroutine(DestroyProjectile(_projectileDuration));
     }
 
-    private void OnDestroy()
+    protected void OnDestroy()
     {
         if (_hitArea != null)
         {
@@ -33,21 +31,13 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public float ProjectileDamage
-    {
-        set { _projectileDamage = value; }
-        get { return _projectileDamage; }
-    }
-
-    public float Damage => _projectileDamage;
-
-    private IEnumerator DestroyProjectile(float destroyDelay)
+    protected IEnumerator DestroyProjectile(float destroyDelay)
     {
         yield return new WaitForSeconds(destroyDelay);
         Destroy(gameObject);
     }
 
-    private void OnHittedHandler()
+    protected virtual void OnHittedHandler()
     {
         StopCoroutine("DestroyProjectile");
         Destroy(gameObject);

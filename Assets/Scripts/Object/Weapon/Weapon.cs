@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IHitResponder
 {
+    [SerializeField] private CharacterEntity _ownerEntity;
+
     [SerializeField] protected bool _isOnAction = false;
     [SerializeField] protected float _actionCooldown;
-    private float _cooldownTimer = -1f;
-    protected IHitResponder _ownerHitResponder;
-    public IHitResponder OwnerHitResponder { set; get; }
+    [SerializeField] protected float _damage;
+    protected float _cooldownTimer = -1f;
 
     public bool IsOnAction
     {
@@ -21,6 +22,19 @@ public class Weapon : MonoBehaviour
         {
             return (_cooldownTimer > 0f);
         }
+    }
+
+    public CharacterEntity OwnerEntity
+    {
+        set => _ownerEntity = value;
+        get => _ownerEntity;
+    }
+
+    public float Damage => _damage;
+
+    public GameObject Owner
+    {
+        get => _ownerEntity?.gameObject;
     }
 
     protected virtual void Update()
@@ -62,5 +76,40 @@ public class Weapon : MonoBehaviour
     protected virtual bool CanDoAction()
     {
         return (!IsOnCooldown);
+    }
+
+    public bool CheckHit(HitData hitData)
+    {
+        Debug.Log($"_CheckHit Between {hitData.HitArea.HitResponder.Owner.name} and {hitData.HurtArea.HurtResponder.Owner.name}");
+        if (_ownerEntity == null)
+        {
+            return false;
+        }
+
+        if (hitData.HurtArea == null)
+        {
+            return false;
+        }
+
+        if (hitData.HurtArea.HurtResponder.Owner == Owner)
+        {
+            return false;
+        }
+
+        if (hitData.HurtArea.HurtResponder.Owner.TryGetComponent(out IHaveTeam haveTeamCom))
+        {
+            if (haveTeamCom.MyTeam == _ownerEntity.MyTeam)
+            {
+                return false;
+            }
+        }
+
+        Debug.Log($"Success Hit Between {hitData.HitArea.HitResponder.Owner.name} and {hitData.HurtArea.HurtResponder.Owner.name}");
+        return true;
+    }
+
+    public void Response(HitData hitData)
+    {
+
     }
 }

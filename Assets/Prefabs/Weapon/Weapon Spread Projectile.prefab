@@ -226,8 +226,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7578414f54ddd44b090e36343a2b82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ownerEntity: {fileID: 0}
   _isOnAction: 0
   _actionCooldown: 2
+  _damage: 1.5
   _projectilePrefab: {fileID: 7911565888522328405, guid: 8f5b16df89452ed44b18fd04486450d8, type: 3}
   _projectileForce: 25
   _spreadPoints:
