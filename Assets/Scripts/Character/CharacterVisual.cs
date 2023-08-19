@@ -27,5 +27,7 @@ public class CharacterVisual : MonoBehaviour
 
         float lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
         _rotatedTransform.eulerAngles = new Vector3(_rotatedTransform.localRotation.x, _rotatedTransform.localRotation.y, lookAngle);
+
+        _rotatedTransform.localScale = new Vector3(_rotatedTransform.localScale.x, Mathf.Sign(_lookDirection.x), _rotatedTransform.localScale.z);
     }
 }
