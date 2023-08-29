@@ -18,7 +18,7 @@ public class CharacterAiData
     public bool CanAttack { set => _canAttack = value; get => _canAttack; }
 }
 
-public class CharacterAi : MonoBehaviour
+public class CharacterAiBrain : MonoBehaviour
 {
     [SerializeField] private CharacterMovement _characterMovement;
     [SerializeField] private CharacterVisual _characterVisual;
