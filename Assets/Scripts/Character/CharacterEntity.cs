@@ -8,7 +8,7 @@ public class CharacterEntity : MonoBehaviour, IHurtResponder, IHaveHealth, IHave
     [SerializeField] private float _maxHealth;
     [SerializeField] private float _currentHealth;
     [SerializeField] private Team _myTeam;
-
+    [SerializeField] private bool _isAlive = true;
 
     public GameObject Owner => gameObject;
 
@@ -16,6 +16,7 @@ public class CharacterEntity : MonoBehaviour, IHurtResponder, IHaveHealth, IHave
     public float CurrentHealth { get => _currentHealth; set => _currentHealth = value; }
     public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
     public Team MyTeam { get => _myTeam; set => _myTeam = value; }
+    public bool IsAlive { get => _isAlive; set => _isAlive = value; }
 
     [SerializeField] private IHurtArea[] _hurtAreas;
 
@@ -24,9 +25,15 @@ public class CharacterEntity : MonoBehaviour, IHurtResponder, IHaveHealth, IHave
         InitiateHurtBoxes();
     }
 
+    private void OnEnable()
+    {
+        IsAlive = true;
+        CurrentHealth = MaxHealth;
+    }
+
     private void Start()
     {
-        CurrentHealth = MaxHealth;
+        
     }
 
     private void InitiateHurtBoxes()
@@ -41,7 +48,7 @@ public class CharacterEntity : MonoBehaviour, IHurtResponder, IHaveHealth, IHave
 
     public bool CheckHit(HitData hitData)
     {
-        return true;
+        return IsAlive;
     }
 
     public void Response(HitData hitData)
@@ -55,7 +62,14 @@ public class CharacterEntity : MonoBehaviour, IHurtResponder, IHaveHealth, IHave
 
         if (CurrentHealth <= 0f)
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        _isAlive = false;
+        gameObject.SetActive(false);
+        Destroy(gameObject, 3f);
     }
 }

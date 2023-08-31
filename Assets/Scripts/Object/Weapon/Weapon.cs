@@ -80,7 +80,6 @@ public class Weapon : MonoBehaviour, IHitResponder
 
     public bool CheckHit(HitData hitData)
     {
-        Debug.Log($"_CheckHit Between {hitData.HitArea.HitResponder.Owner.name} and {hitData.HurtArea.HurtResponder.Owner.name}");
         if (_ownerEntity == null)
         {
             return false;
@@ -104,7 +103,6 @@ public class Weapon : MonoBehaviour, IHitResponder
             }
         }
 
-        Debug.Log($"Success Hit Between {hitData.HitArea.HitResponder.Owner.name} and {hitData.HurtArea.HurtResponder.Owner.name}");
         return true;
     }
 

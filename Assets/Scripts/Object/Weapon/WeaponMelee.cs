@@ -42,7 +42,6 @@ public class WeaponMelee : Weapon
         _hitAreas = new List<IHitArea>(GetComponentsInChildren<IHitArea>());
         foreach(IHitArea hitArea in _hitAreas)
         {
-            Debug.Log($"Found {hitArea.HitAreaTransform.name} HitArea for {gameObject.name}");
             hitArea.HitResponder = this;
         }
     }

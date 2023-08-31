@@ -6,4 +6,6 @@ public interface IHaveHealth
 {
     public float MaxHealth { set; get; }
     public float CurrentHealth { set; get; }
+
+    public bool IsAlive { set; get; }
 }

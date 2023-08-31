@@ -8,12 +8,6 @@ public class CharacterAiData
     [SerializeField] private GameObject _aiTarget = null;
     [SerializeField] private bool _canAttack = false;
 
-    /*public GameObject AiTarget 
-    { 
-        set { _aiTarget = value; }
-        get { return _aiTarget; }
-    }*/
-
     public GameObject AiTarget { set => _aiTarget = value; get => _aiTarget; }
     public bool CanAttack { set => _canAttack = value; get => _canAttack; }
 }
