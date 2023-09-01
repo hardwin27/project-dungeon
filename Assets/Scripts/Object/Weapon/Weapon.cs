@@ -95,12 +95,9 @@ public class Weapon : MonoBehaviour, IHitResponder
             return false;
         }
 
-        if (hitData.HurtArea.HurtResponder.Owner.TryGetComponent(out IHaveTeam haveTeamCom))
+        if (hitData.HurtArea.HurtResponder.Owner.tag == _ownerEntity.gameObject.tag)
         {
-            if (haveTeamCom.MyTeam == _ownerEntity.MyTeam)
-            {
-                return false;
-            }
+            return false;
         }
 
         return true;

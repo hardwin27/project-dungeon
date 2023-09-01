@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 6918694387003695738}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7417130876126453622
 MonoBehaviour:
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 7183792232038673603}
   - component: {fileID: 8591420336348203993}
   - component: {fileID: 4386571043522055796}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,4 +327,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8

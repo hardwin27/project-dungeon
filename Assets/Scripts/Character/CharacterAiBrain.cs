@@ -2,25 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class CharacterAiData
-{
-    [SerializeField] private GameObject _aiTarget = null;
-    [SerializeField] private bool _canAttack = false;
-
-    public GameObject AiTarget { set => _aiTarget = value; get => _aiTarget; }
-    public bool CanAttack { set => _canAttack = value; get => _canAttack; }
-}
-
 public class CharacterAiBrain : MonoBehaviour
 {
     [SerializeField] private CharacterMovement _characterMovement;
     [SerializeField] private CharacterVisual _characterVisual;
     [SerializeField] private CharacterCombat _characterCombat;
 
-    [SerializeField] private CharacterAiData _aiData = new CharacterAiData();
+    [SerializeField] private AiData _aiData = new AiData();
 
-    [SerializeField] private LayerMask _targetLayerMask;
     [SerializeField] private float _targetDetectionRange;
 
     [SerializeField] private float _combatDetectionRange;
@@ -51,14 +40,14 @@ public class CharacterAiBrain : MonoBehaviour
         StateChase stateChase = new StateChase(_characterMovement, _characterVisual, _aiData);
         StateCombat stateCombat = new StateCombat(_characterMovement, _characterVisual, _characterCombat, _aiData);
 
-        _stateMachine.AddTransition(stateIdle, stateChase, () => _aiData.AiTarget != null);
-        _stateMachine.AddTransition(stateChase, stateIdle, () => _aiData.AiTarget == null);
+        _stateMachine.AddTransition(stateIdle, stateChase, () => _aiData.IsTargetDetected);
+        _stateMachine.AddTransition(stateChase, stateIdle, () => !_aiData.IsTargetDetected);
 
         _stateMachine.AddTransition(stateIdle, stateCombat, () => _aiData.CanAttack);
         _stateMachine.AddTransition(stateChase, stateCombat, () => _aiData.CanAttack);
 
-        _stateMachine.AddTransition(stateCombat, stateIdle, () => !_aiData.CanAttack && _aiData.AiTarget == null);
-        _stateMachine.AddTransition(stateCombat, stateChase, () => !_aiData.CanAttack && _aiData.AiTarget != null);
+        _stateMachine.AddTransition(stateCombat, stateIdle, () => !_aiData.CanAttack && !_aiData.IsTargetDetected);
+        _stateMachine.AddTransition(stateCombat, stateChase, () => !_aiData.CanAttack && _aiData.IsTargetDetected);
 
 
 
@@ -73,31 +62,33 @@ public class CharacterAiBrain : MonoBehaviour
 
     private void DetectTarget()
     {
-        Collider2D targetCollider = Physics2D.OverlapCircle(_characterVisual.transform.position, _targetDetectionRange, _targetLayerMask);
-        if (targetCollider != null)
+        List<GameObject> detectedTargets = new List<GameObject>();
+        Collider2D[] detectedColliders = Physics2D.OverlapCircleAll(transform.position, _targetDetectionRange, _aiData.TargetLayer);
+
+        foreach (Collider2D detectedCollider in detectedColliders)
         {
-            
-            GameObject targetObject = targetCollider.gameObject;
-            _aiData.AiTarget = targetObject;
+            if (_aiData.TargetTags.Contains(detectedCollider.gameObject.tag))
+            {
+                detectedTargets.Add(detectedCollider.gameObject);
+            }
         }
-        else
-        {
-            _aiData.AiTarget = null;
-        }
+
+
+        _aiData.AiTargets = detectedTargets;
     }
 
     private void CanAttackHandler()
     {
-        if (_aiData.AiTarget == null)
+        if (!_aiData.IsTargetDetected)
         {
             _aiData.CanAttack = false;
         }
         else
         {
-            Collider2D[] overlapColliders = Physics2D.OverlapCircleAll(_characterVisual.transform.position, _combatDetectionRange, _targetLayerMask);
+            Collider2D[] overlapColliders = Physics2D.OverlapCircleAll(_characterVisual.transform.position, _combatDetectionRange, _aiData.TargetLayer);
             foreach(Collider2D overlapCollider in overlapColliders)
             {
-                if (overlapCollider.gameObject == _aiData.AiTarget)
+                if (overlapCollider.gameObject == _aiData.AiTargets[0])
                 {
                     _aiData.CanAttack = true;
                     return;
@@ -106,17 +97,6 @@ public class CharacterAiBrain : MonoBehaviour
 
             _aiData.CanAttack = false;
         }
-
-        /*Collider2D targetCollider = Physics2D.OverlapCircle(_characterVisual.transform.position, _combatDetectionRange, _targetLayerMask);
-        
-        if (targetCollider != null)
-        {
-            _aiData.AiTarget = targetCollider.gameObject;
-        }
-        else
-        {
-            _aiData.AiTarget = null;
-        }*/
     }
 
     private void OnDrawGizmos()

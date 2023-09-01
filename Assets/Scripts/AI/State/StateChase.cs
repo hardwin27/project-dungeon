@@ -6,9 +6,9 @@ public class StateChase : IState
 {
     private CharacterMovement _characterMovement;
     private CharacterVisual _characterVisual;
-    private CharacterAiData _aiData;
+    private AiData _aiData;
 
-    public StateChase(CharacterMovement characterMovement, CharacterVisual characterVisual, CharacterAiData aiData)
+    public StateChase(CharacterMovement characterMovement, CharacterVisual characterVisual, AiData aiData)
     {
         _characterMovement = characterMovement;
         _characterVisual = characterVisual;
@@ -28,12 +28,12 @@ public class StateChase : IState
 
     public void Tick()
     {
-        if (_aiData.AiTarget == null)
+        if (!_aiData.IsTargetDetected)
         {
             return;
         }
 
-        Transform targetTransform = _aiData.AiTarget.transform;
+        Transform targetTransform = _aiData.AiTargets[0].transform;
 
         _characterVisual.LookTo(targetTransform.position);
         _characterMovement.MoveToDirection((targetTransform.position - _characterVisual.transform.position).normalized);

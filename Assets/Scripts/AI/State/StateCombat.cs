@@ -7,9 +7,9 @@ public class StateCombat : IState
     private CharacterMovement _characterMovement;
     private CharacterVisual _characterVisual;
     private CharacterCombat _characterCombat;
-    private CharacterAiData _aiData;
+    private AiData _aiData;
     
-    public StateCombat(CharacterMovement characterMovement, CharacterVisual characterVisual, CharacterCombat characterCombat, CharacterAiData aiData)
+    public StateCombat(CharacterMovement characterMovement, CharacterVisual characterVisual, CharacterCombat characterCombat, AiData aiData)
     {
         _characterMovement = characterMovement;
         _characterVisual = characterVisual;
@@ -29,9 +29,9 @@ public class StateCombat : IState
 
     public void Tick()
     {
-        if (_aiData.AiTarget != null)
+        if (_aiData.IsTargetDetected)
         {
-            _characterVisual.LookTo(_aiData.AiTarget.transform.position);
+            _characterVisual.LookTo(_aiData.AiTargets[0].transform.position);
             _characterCombat.StartInputAction();
         }
     }
