@@ -7,13 +7,14 @@ public class StateChase : IState
     private CharacterMovement _characterMovement;
     private CharacterVisual _characterVisual;
     private AiData _aiData;
+    private float _sqrChaseDistanceMargin;
 
-    public StateChase(CharacterMovement characterMovement, CharacterVisual characterVisual, AiData aiData)
+    public StateChase(AiData aiData, CharacterMovement characterMovement, CharacterVisual characterVisual, float chaseDistanceMargin)
     {
+        _aiData = aiData;
         _characterMovement = characterMovement;
         _characterVisual = characterVisual;
-        _characterVisual = characterVisual;
-        _aiData = aiData;
+        _sqrChaseDistanceMargin = chaseDistanceMargin * chaseDistanceMargin;
     }
 
     public void OnEnter()
@@ -28,14 +29,28 @@ public class StateChase : IState
 
     public void Tick()
     {
+        ChaseHandler();
+    }
+
+    private void ChaseHandler()
+    {
         if (!_aiData.IsTargetDetected)
         {
             return;
         }
 
-        Transform targetTransform = _aiData.AiTargets[0].transform;
+        _characterVisual.LookTo(_aiData.AiTargets[0].transform.position);
 
-        _characterVisual.LookTo(targetTransform.position);
-        _characterMovement.MoveToDirection((targetTransform.position - _characterVisual.transform.position).normalized);
+        Vector2 vectorToTarget = (Vector2)(_aiData.AiTargets[0].transform.position - _characterMovement.transform.position);
+
+        if (Mathf.Abs(vectorToTarget.sqrMagnitude) >= _sqrChaseDistanceMargin)
+        {
+            _characterMovement.MoveToDirection(vectorToTarget.normalized);
+        }
+        else
+        {
+            _characterMovement.MoveToDirection(Vector2.zero);
+        }
+
     }
 }
