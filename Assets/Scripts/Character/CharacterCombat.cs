@@ -10,6 +10,8 @@ public class CharacterCombat : MonoBehaviour
     /*[SerializeField] private float _damage;*/
     [SerializeField] private float _damageMultiplier = 0f;
 
+    [SerializeField] private List<string> _hostileTags = new List<string>();
+
     /*public float Damage => _damage;*/
 
     public GameObject Owner => gameObject;

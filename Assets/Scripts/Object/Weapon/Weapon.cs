@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour, IHitResponder
     [SerializeField] protected bool _isOnAction = false;
     [SerializeField] protected float _actionCooldown;
     [SerializeField] protected float _damage;
+    [SerializeField] protected List<string> _targetTags = new List<string>();
     protected float _cooldownTimer = -1f;
 
     public bool IsOnAction
@@ -40,6 +41,11 @@ public class Weapon : MonoBehaviour, IHitResponder
     protected virtual void Update()
     {
         CooldownTimerHandler();
+    }
+
+    public void SetTargetTags(List<string> targetTags)
+    {
+        _targetTags = targetTags;
     }
 
     protected virtual void CooldownTimerHandler()
@@ -98,6 +104,13 @@ public class Weapon : MonoBehaviour, IHitResponder
         if (hitData.HurtArea.HurtResponder.Owner.tag == _ownerEntity.gameObject.tag)
         {
             return false;
+        }
+        else
+        {
+            if (!_targetTags.Contains(hitData.HurtArea.HurtResponder.Owner.tag))
+            {
+                return false;
+            }
         }
 
         return true;
