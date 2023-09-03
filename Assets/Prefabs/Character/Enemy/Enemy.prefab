@@ -245,7 +245,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9210912414369899809, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6445338005895709534}
+      addedObject: {fileID: 951552826967496693}
   m_SourcePrefab: {fileID: 100100000, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
 --- !u!4 &1797674893078715255 stripped
 Transform:
@@ -273,7 +273,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9210912414369899809, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
   m_PrefabInstance: {fileID: 3943608729525116045}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6445338005895709534
+--- !u!114 &951552826967496693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,7 +282,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5289828733177936300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 078935a9490716540b268216f001d22b, type: 3}
+  m_Script: {fileID: 11500000, guid: 29d822feefe9cab42b19a65c5fa54db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _characterMovement: {fileID: 2794425868970275048}
@@ -294,11 +294,15 @@ MonoBehaviour:
       m_Bits: 8
     _targetTags:
     - Player
-  _targetDetectionRange: 10
+  _targetDetectionRange: 8
   _currentState: 
   _stateMachine:
     _currentTransitions: []
     _fromAnyTransitions: []
+  _characterCombat: {fileID: 0}
+  _chaseDistanceMargin: 0
+  _canAttack: 0
+  _combatDetectionRange: 0
 --- !u!114 &5295594465309008563 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9207389695606914622, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}

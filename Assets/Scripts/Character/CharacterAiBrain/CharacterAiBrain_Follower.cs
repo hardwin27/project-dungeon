@@ -19,9 +19,9 @@ public class CharacterAiBrain_Follower : CharacterAiBrain
         _stateMachine.AddTransition(_stateChase, _stateIdle, () => !_aiData.IsTargetDetected);
     }
 
-    protected override void OnDrawGizmos()
+    protected override void GizmoHandler()
     {
-        base.OnDrawGizmos();
+        base.GizmoHandler();
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(_characterVisual.transform.position, _chaseDistanceMargin);

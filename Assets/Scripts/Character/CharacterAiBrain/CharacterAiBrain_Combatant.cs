@@ -62,9 +62,9 @@ public class CharacterAiBrain_Combatant : CharacterAiBrain
         }
     }
 
-    protected override void OnDrawGizmos()
+    protected override void GizmoHandler()
     {
-        base.OnDrawGizmos();
+        base.GizmoHandler();
 
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(_characterVisual.transform.position, _chaseDistanceMargin);

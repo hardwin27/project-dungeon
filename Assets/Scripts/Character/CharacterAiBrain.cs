@@ -98,26 +98,20 @@ public class CharacterAiBrain : MonoBehaviour
         }
     }*/
 
-    protected virtual void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         if (_characterVisual == null)
         {
             return;
         }
 
-        AiTargetDetectionGizmos();
+        GizmoHandler();
         /*AiCombatRangeGizmos();*/
     }
 
-    protected void AiTargetDetectionGizmos()
+    protected virtual void GizmoHandler()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(_characterVisual.transform.position, _targetDetectionRange);
     }
-
-    /*protected void AiCombatRangeGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(_characterVisual.transform.position, _combatDetectionRange);
-    }*/
 }
