@@ -7,6 +7,7 @@ public class CharacterCombat : MonoBehaviour
     [SerializeField] private CharacterEntity _characterEntity;
 
     [SerializeField] private Weapon _weapon;
+    [SerializeField] private List<Weapon> _weapons = new List<Weapon>();
     /*[SerializeField] private float _damage;*/
     [SerializeField] private float _damageMultiplier = 0f;
 
@@ -26,6 +27,7 @@ public class CharacterCombat : MonoBehaviour
     {
         /*_weapon.OwnerHitResponder = this;*/
         _weapon.OwnerEntity = _characterEntity;
+        _weapon.SetTargetTags(_hostileTags);
     }
 
     public void StartInputAction()

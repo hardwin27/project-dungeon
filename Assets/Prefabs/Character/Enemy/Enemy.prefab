@@ -92,6 +92,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1797674893078715255}
     m_Modifications:
+    - target: {fileID: 2634332761024203358, guid: 772b363c59cc12c4f8e734448209ae85, type: 3}
+      propertyPath: _ownerEntity
+      value: 
+      objectReference: {fileID: 1659759721436827852}
     - target: {fileID: 3721542269147999586, guid: 772b363c59cc12c4f8e734448209ae85, type: 3}
       propertyPath: m_Name
       value: WeaponGun
@@ -187,11 +191,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4757218066761853846, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -11.1
       objectReference: {fileID: 0}
     - target: {fileID: 4757218066761853846, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 6.6
       objectReference: {fileID: 0}
     - target: {fileID: 4757218066761853846, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -245,8 +249,22 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9210912414369899809, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 2795348782229589765}
+    - targetCorrespondingSourceObject: {fileID: 9210912414369899809, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 951552826967496693}
   m_SourcePrefab: {fileID: 100100000, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
+--- !u!114 &1659759721436827852 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2428044460530535489, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
+  m_PrefabInstance: {fileID: 3943608729525116045}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5289828733177936300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df864acd9c405148a631f02b04ee397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1797674893078715255 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3334947361584646138, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
@@ -273,6 +291,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9210912414369899809, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
   m_PrefabInstance: {fileID: 3943608729525116045}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2795348782229589765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5289828733177936300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b7f3a8d15bab846a7f72d5dbd32bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterEntity: {fileID: 1659759721436827852}
+  _weapon: {fileID: 322026394856229744}
+  _damageMultiplier: 1
+  _hostileTags:
+  - Player
 --- !u!114 &951552826967496693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,10 +334,10 @@ MonoBehaviour:
   _stateMachine:
     _currentTransitions: []
     _fromAnyTransitions: []
-  _characterCombat: {fileID: 0}
-  _chaseDistanceMargin: 0
+  _characterCombat: {fileID: 2795348782229589765}
+  _chaseDistanceMargin: 1.5
   _canAttack: 0
-  _combatDetectionRange: 0
+  _combatDetectionRange: 6
 --- !u!114 &5295594465309008563 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9207389695606914622, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
