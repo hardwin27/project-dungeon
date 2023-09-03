@@ -411,6 +411,8 @@ MonoBehaviour:
   _characterEntity: {fileID: 1359084459946580099}
   _weapon: {fileID: 8613829615509011946}
   _damageMultiplier: 1
+  _hostileTags:
+  - Enemy
 --- !u!1001 &6827784714412394540
 PrefabInstance:
   m_ObjectHideFlags: 0

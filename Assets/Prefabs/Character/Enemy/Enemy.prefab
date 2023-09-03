@@ -268,17 +268,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2116994742225030569, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
   m_PrefabInstance: {fileID: 3943608729525116045}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3410080996797438700 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1867174873912215137, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
-  m_PrefabInstance: {fileID: 3943608729525116045}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5289828733177936300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5b7f3a8d15bab846a7f72d5dbd32bd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5289828733177936300 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9210912414369899809, guid: 6850fe65ce8238940b15bd5ec98b2b4e, type: 3}
@@ -298,17 +287,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterMovement: {fileID: 2794425868970275048}
   _characterVisual: {fileID: 5295594465309008563}
-  _characterCombat: {fileID: 3410080996797438700}
   _aiData:
     _aiTargets: []
-    _canAttack: 0
     _targetLayer:
       serializedVersion: 2
       m_Bits: 8
     _targetTags:
     - Player
   _targetDetectionRange: 10
-  _combatDetectionRange: 5
   _currentState: 
   _stateMachine:
     _currentTransitions: []

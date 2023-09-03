@@ -9,12 +9,12 @@ public class StateCombat : IState
     private CharacterCombat _characterCombat;
     private AiData _aiData;
     
-    public StateCombat(CharacterMovement characterMovement, CharacterVisual characterVisual, CharacterCombat characterCombat, AiData aiData)
+    public StateCombat(AiData aiData, CharacterMovement characterMovement, CharacterVisual characterVisual, CharacterCombat characterCombat)
     {
+        _aiData = aiData;
         _characterMovement = characterMovement;
         _characterVisual = characterVisual;
         _characterCombat = characterCombat;
-        _aiData = aiData;
     }
 
     public void OnEnter()
