@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 721080375496290661}
   - component: {fileID: 7417130876126453622}
   m_Layer: 0
-  m_Name: Sword
+  m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,6 +49,7 @@ MonoBehaviour:
   _isOnAction: 0
   _actionCooldown: 0.5
   _damage: 1
+  _targetTags: []
   _animator: {fileID: 4674684221352165207}
   _weaponAnimationEventBroadcaster: {fileID: 7172998174890503724}
 --- !u!1 &4757393932266075637
@@ -212,7 +213,7 @@ Animator:
   m_GameObject: {fileID: 7160627517843469263}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 51bc6747e07e6d748af37935a8a71247, type: 2}
+  m_Controller: {fileID: 22100000, guid: 89e7e4ecf18e12a47888ce109195bf0b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
