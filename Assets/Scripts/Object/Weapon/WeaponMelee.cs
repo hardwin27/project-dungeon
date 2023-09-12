@@ -51,6 +51,7 @@ public class WeaponMelee : Weapon
         switch(eventName)
         {
             case "AttackEnded":
+                Debug.Log($"{gameObject.name} AttackEnded");
                 _isOnAction = false;
                 StartCooldown();
                 break;

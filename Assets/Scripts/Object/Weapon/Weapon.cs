@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour, IHitResponder
     [SerializeField] protected float _actionCooldown;
     [SerializeField] protected float _damage;
     [SerializeField] protected List<string> _targetTags = new List<string>();
-    protected float _cooldownTimer = -1f;
+    [SerializeField] protected float _cooldownTimer = -1f;
 
     public bool IsOnAction
     {
@@ -81,7 +81,7 @@ public class Weapon : MonoBehaviour, IHitResponder
 
     protected virtual bool CanDoAction()
     {
-        return (!IsOnCooldown);
+        return (!IsOnCooldown && !_isOnAction);
     }
 
     public bool CheckHit(HitData hitData)
